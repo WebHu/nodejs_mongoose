@@ -41,6 +41,7 @@ db.on('disconnected',function () {
 })
 //监听进程退出
 process.on('SIGINT',function () {
+    console.log("SIGINT ..");
     db.close(function () {
         console.log("disconnected ..");
     })

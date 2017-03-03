@@ -7,7 +7,7 @@
 
 var connectionString,mongoose,db,options;
 mongoose = require('mongoose');
-connectionString="mongodb://192.168.1.165:27017/cars";
+connectionString="mongodb://192.168.1.165:27017/messageQ";
 options = {
     db: {
         native_parser: true//启动本地解析use c++
@@ -33,20 +33,20 @@ db.on('error', function (err) {
 });
 
 db.on('connected',function () {
- //   console.log("mongoose connected to"+connectionString);
-})
+    //console.log("mongoose connected to" );
+});;
 //断开连接事件
 db.on('disconnected',function () {
     console.log("mongoose disconnected to"+connectionString);
-})
+});
 //监听进程退出
 process.on('SIGINT',function () {
     console.log("SIGINT ..");
     db.close(function () {
         console.log("disconnected ..");
-    })
+    });
     process.exit(0);
-})
+});
 /*
 db.once('open', function callback () {
     console.log('mongoose open success');

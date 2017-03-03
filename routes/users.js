@@ -1,3 +1,9 @@
+/**
+ * fileName:users.js
+ * author:gamehu
+ * date:2017/3/3 13:55
+ * desc:根据http请求，处理CRUD操作
+*/
 var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
@@ -8,7 +14,7 @@ var UserModel = require("./../model/userSchema");
 //创建entity，相当于mongodb的document，即行
 //var UserInfo=new UserModel({name:"zhangsan"});
 
-require('../db/dbconnect');
+//require('../db/dbconnect');
 //任意请求方式，且是完整匹配
 /*router.all('/add/:name/:age', function (req, res, next) {
  console.log("all...")
@@ -104,7 +110,7 @@ router.post('/findByName/:name', function (req, res, next) {
 
 });
 //router.use(bodyParser.urlencoded({extended: true}));
-var jsonParser = bodyParser.json()
+var jsonParser = bodyParser.json();
 //var urlencoded= bodyParser.urlencoded({extended: false});
 //post表单提交形式的参数
 router.post('/findByName',jsonParser, function (req, res, next) {
@@ -168,12 +174,12 @@ function add(req, res, next) {
         UserModel.create({name: name, age: age}, function (err, node, numAffected) {
             if (err) {
                 res.send({'success': false, 'err': err});
-                return;
+
             } else {
                 //node返回新增的对象信息
                 console.log("save: " + node);
                 res.redirect('/users');
-                return;
+
             }
         });
     } catch (err) {
@@ -189,7 +195,7 @@ function add(req, res, next) {
 
 //新增
 router.get('/create/:name/:age', function (req, res, next) {
-    console.log("create....")
+    console.log("create....");
     add(req, res, next);
     res.end;
 });

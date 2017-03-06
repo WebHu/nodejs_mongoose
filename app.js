@@ -8,8 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 /*************************************************/
-//mq
-
+//mq：获取连接，加载mq的schema，加载mq的路由
 require('./db/dbconnect');
 require( './model/messageSchema');
 var mq=require('./routes/message');

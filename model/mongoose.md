@@ -21,14 +21,14 @@
 
 2.  Schema、Model、Entity的关系请牢记，Schema生成Model，Model创造Entity，Model和Entity都可对数据库操作造成影响，但Model比Entity更具操作性。
 
-###1.Schema——纯洁的数据库原型
+### Schema——纯洁的数据库原型
 
-####1.1 什么是Schema
+#### 什么是Schema
 
     我理解Schema仅仅只是一断代码，他书写完成后程序依然无法使用，更无法通往数据库端
     他仅仅只是数据库模型在程序片段中的一种表现，或者是数据属性模型
 
-####1.2 如何定义Schema
+#### 如何定义Schema
 ```
     var BlogSchema = new Schema({
       title:String,
@@ -37,8 +37,8 @@
       /xxx是一个字符串，定义了属性，yyy是一个Schema.Type，定义了属性类型
     });
 ```
-###2. Schema的扩展
-####虚拟属性
+### Schema的扩展
+#### 虚拟属性
 ```
     //虚拟属性，该属性不会写入数据库
     UserSchema.virtual('full').get(function(){
@@ -46,7 +46,7 @@
     });
 ```
 
-####添加schema的方法
+#### 添加schema的方法
 ```
 //实例方法（model实例化为entity之后才能调用）
 UserSchema.methods.introduce = function() {
@@ -59,10 +59,10 @@ UserSchema.statics.delete_by_name = function(name, cb_succ, cb_fail) {};
 //将该Schema发布为Model  ,user的数据库模型,model具有数据库的操作行为
 var UserModel = mongoose.model('UserModel', UserSchema);
 ```
-###Middleware中间件
+### Middleware中间件
 
 一旦定义了中间件，就会在全部中间件执行完后执行其他操作，使用中间件可以雾化模型，避免异步操作的层层迭代嵌套
-####8.4 使用范畴
+#### 使用范畴
 *    复杂的验证
 *  删除有主外关联的doc
 *  异步默认
@@ -101,12 +101,12 @@ schema.pre('save',function(next,done){
 ```
 //model实例化为entity
 //var u=new  UserModel({name:"zhangsan",age:4,info:"kk"});
-```
+
 //console.log(u.introduce());调用实例化方法
 //console.log(UserModel.delete_by_name);调用静态方法
 
 ```
-###Model
+### Model
 
 #### 什么是Model
 
@@ -139,15 +139,15 @@ Model模型，是经过Schema构造来的，除了Schema定义的数据库骨架
   var tankEntity = new TankModel('someother','size:big');
   tankEntity.save();
 
-###6.Query
+### Query
 
 查询是数据库中运用最多也是最麻烦的地方，这里对Query解读的并不完善，仅仅是自己的一点领悟而已。
 
-####6.1 查询的方式
+#### 查询的方式
 
 通常有2种查询方式，一种是直接查询，一种是链式查询（2种查询都是自己命名的）
 
-#####6.1.1 直接查询
+##### 直接查询
 
 在查询时带有回调函数的，称之为直接查询，查询的条件往往通过API来设定，例如：
 
@@ -157,7 +157,7 @@ Model模型，是经过Schema构造来的，除了Schema定义的数据库骨架
 
 具体的查询参数，请查询API
 
-#####6.1.2 链式查询
+##### 链式查询
 
 在查询时候，不带回调，而查询条件通过API函数来制定，例如：
 
@@ -182,7 +182,7 @@ Model模型，是经过Schema构造来的，除了Schema定义的数据库骨架
       .exec(callback);
 
 
-###7.Validation
+### Validation
 
 数据的存储是需要验证的，不是什么数据都能往数据库里丢或者显示到客户端的，数据的验证需要记住以下规则：
 
@@ -192,7 +192,7 @@ Model模型，是经过Schema构造来的，除了Schema定义的数据库骨架
     验证是异步递归的，如果你的SubDoc验证失败，Document也将无法保存
     验证并不关心错误类型，而通过ValidationError这个对象可以访问
 
-####7.1 验证器
+####  验证器
 
     required 非空验证
     min/max 范围验证（边值验证）
@@ -221,7 +221,7 @@ Model模型，是经过Schema构造来的，除了Schema定义的数据库骨架
       }
     });
 
-####7.2 验证失败
+####  验证失败
 
 如果验证失败，则会返回err信息，err是一个对象该对象属性如下
 
